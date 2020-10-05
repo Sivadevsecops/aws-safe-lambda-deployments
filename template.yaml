@@ -21,21 +21,12 @@ Resources:
           Type: Linear10PercentEvery1Minute
           Hooks:
             PreTraffic: !Ref preTrafficHook
-      MyApi:
-           Type: AWS::Serverless::Api
-           Properties:
-           StageName: Prod
-               Auth:
-                 DefaultAuthorizer: MyLambdaTokenAuthorizer
-                 Authorizers:
-                 MyLambdaTokenAuthorizer:
-                 FunctionArn: !GetAtt MyAuthFunction.Arn
-      MyAuthFunction:
-           Type: AWS::Serverless::Function
-           Properties:
-           CodeUri: ./src
-           Handler: authorizer.handler
-           Runtime: nodejs12.x
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: get
 
   preTrafficHook:
     Type: AWS::Serverless::Function
