@@ -3,7 +3,7 @@ phases:
   install:
      commands:
         - aws cloudformation package --region us-east-1 --template-file template.yaml --s3-bucket pdpmalaths-lambda-pipeline1 --output-template-file packaged.yaml
-         - sam deploy --template-file packaged.yaml --stack-name mySafeDeployStack --capabilities CAPABILITY_IAM
+        - aws cloudformation deploy --region us-east-1 --template-file packaged.yaml --stack-name mySafeDeployStack --capabilities CAPABILITY_IAM
 
 artifacts:
    type: zip
