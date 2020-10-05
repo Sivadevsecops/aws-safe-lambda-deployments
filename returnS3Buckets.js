@@ -15,7 +15,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
- 'use strict';
+'use strict';
 
 var AWS = require('aws-sdk');
 var s3 = new AWS.S3();
@@ -35,10 +35,21 @@ exports.handler = (event, context, callback) => {
 			var allBuckets = data.Buckets;
 
 			console.log("Total buckets: " + allBuckets.length);
+			//callback(null, allBuckets.length);
+
+			//  New Code begins here
+			var counter=0;
+			for(var i  in allBuckets){
+				if(allBuckets[i].Name[0] === "a")
+					counter++;
+			}
+			console.log("Total buckets starting with a: " + counter);
+
 			callback(null, {
 				statusCode: 200,
-				body: allBuckets.length
+				body: counter
 			});
+			
 		}
 	});	
 }
