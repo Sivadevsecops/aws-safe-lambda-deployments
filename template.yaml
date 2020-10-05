@@ -4,10 +4,10 @@ Description: An example SAM template for Lambda Safe Deployments.
 
 Resources:
 
-  returnS3Buckets:
+  returnS3BucketsNew:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: returnS3Buckets.handler
+      Handler: returnS3BucketsNew.handler
       Runtime: nodejs12.x
       AutoPublishAlias: live
       Policies:
@@ -45,7 +45,7 @@ Resources:
           - Effect: "Allow"
             Action: 
               - "lambda:InvokeFunction"
-            Resource: !Ref returnS3Buckets.Version
+            Resource: !Ref returnS3BucketsNew.Version
       Runtime: nodejs12.x
       FunctionName: 'CodeDeployHook_preTrafficHook'
       DeploymentPreference:
@@ -53,4 +53,4 @@ Resources:
       Timeout: 5
       Environment:
         Variables:
-          NewVersion: !Ref returnS3Buckets.Version
+          NewVersion: !Ref returnS3BucketsNew.Version
